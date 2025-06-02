@@ -1,0 +1,354 @@
+{
+    "01.CountingUnionComplement": [
+        "Set Theory",
+        "Counting",
+        "Probability",
+        "Union",
+        "Complement",
+        "Venn Diagram",
+        "Math Basics"
+    ],
+    "01.Divisibility Rules": [
+        "Divisibility",
+        "Math Basics"
+    ],
+    "01.SetAndElement": [
+        "Set Theory",
+        "Elements"
+    ],
+    "02.AdditionRule": [
+        "Probability",
+        "Addition Rule",
+        "Counting",
+        "Math Basics"
+    ],
+    "02.NumberOfDivisors": [
+        "Divisibility",
+        "Number Theory",
+        "Math Basics"
+    ],
+    "02.SubsetAndEmptySet": [
+        "Set Theory",
+        "Subset",
+        "Empty Set",
+        "Math Basics",
+        "Venn Diagram"
+    ],
+    "03.IntegerDivision": [
+        "Division",
+        "Number Theory",
+        "Math Basics"
+    ],
+    "03.IntersectionAndUnion": [
+        "Set Theory",
+        "Intersection",
+        "Union",
+        "Venn Diagram",
+        "Math Basics"
+    ],
+    "03.MultiplicationRule": [
+        "Probability",
+        "Multiplication Rule",
+        "Counting",
+        "Math Basics"
+    ],
+    "04.Complement": [
+        "Set Theory",
+        "Complement",
+        "Universal Set",
+        "Venn Diagram",
+        "Math Basics"
+    ],
+    "04.EuclideanAlgorithm": [
+        "GCD",
+        "Euclidean Algorithm",
+        "Number Theory",
+        "Math Basics"
+    ],
+    "04.PermutationCount": [
+        "Probability",
+        "Permutation",
+        "Counting",
+        "Math Basics"
+    ],
+    "05.CircularPermutationCount": [
+        "Probability",
+        "Circular Permutation",
+        "Counting",
+        "Math Basics"
+    ],
+    "05.CongruenceRules": [
+        "Congruence",
+        "Number Theory",
+        "Math Basics"
+    ],
+    "05.DeMorgan": [
+        "Set Theory",
+        "De Morgan's Laws",
+        "Complement",
+        "Venn Diagram",
+        "Math Basics"
+    ],
+    "06.RepeatedPermutationCount": [
+        "Probability",
+        "Repeated Permutation",
+        "Counting",
+        "Math Basics"
+    ],
+    "07.CombinationCount": [
+        "Probability",
+        "Combination",
+        "Counting",
+        "Math Basics"
+    ],
+    "08.PermutationWithIdenticals": [
+        "Probability",
+        "Permutation",
+        "Identical Objects",
+        "Counting",
+        "Math Basics"
+    ],
+    "09.ProbabilityOfA": [
+        "Probability",
+        "Counting",
+        "Math Basics"
+    ],
+    "1.Average (Mean) of Data": [
+        "Data Analysis",
+        "Average",
+        "Mean",
+        "Representative Value",
+        "Statistics"
+    ],
+    "10.Circle-Angle-Theorem": [
+        "Geometry",
+        "Circle",
+        "Inscribed Angle",
+        "Central Angle"
+    ],
+    "10.ProbabilityProperties": [
+        "Probability",
+        "Properties",
+        "Counting",
+        "Math Basics"
+    ],
+    "11.Circle-Angle-Theorem-Reverse": [
+        "Geometry",
+        "Circle",
+        "Inscribed Angle",
+        "Converse Theorem"
+    ],
+    "11.ComplementProbability": [
+        "Probability",
+        "Complement",
+        "Counting",
+        "Math Basics"
+    ],
+    "12.Cyclic-Quadrilateral-Properties": [
+        "Geometry",
+        "Circle",
+        "Cyclic Quadrilateral",
+        "Opposite Angles"
+    ],
+    "12.IndependentProbability": [
+        "Probability",
+        "Independence",
+        "Counting",
+        "Math Basics"
+    ],
+    "13.BinomialProbability": [
+        "Probability",
+        "Binomial",
+        "Repeated Trials",
+        "Counting",
+        "Math Basics"
+    ],
+    "13.Cyclic-Quadrilateral-Condition": [
+        "Geometry",
+        "Circle",
+        "Cyclic Quadrilateral",
+        "Opposite Angles",
+        "Condition"
+    ],
+    "14.Circle-Tangent-Length": [
+        "Geometry",
+        "Circle",
+        "Tangent",
+        "Equal Tangents"
+    ],
+    "14.MultiplicationRule": [
+        "Probability",
+        "Multiplication Rule",
+        "Conditional Probability",
+        "Math Basics"
+    ],
+    "15.Area Bounded by Curve y=f(x)": [
+        "Integration",
+        "Area",
+        "Curve",
+        "Definite Integral"
+    ],
+    "15.Expectation": [
+        "Probability",
+        "Expectation",
+        "Math Basics"
+    ],
+    "15.Tangent-Chord-Angle": [
+        "Geometry",
+        "Circle",
+        "Tangent",
+        "Chord",
+        "Angle",
+        "Alternate Segment Theorem"
+    ],
+    "16.Area Between Two Curves": [
+        "Integration"
+    ],
+    "16.Power-of-Point": [
+        "Geometry",
+        "Circle",
+        "Power of a Point",
+        "Chord",
+        "Intersection"
+    ],
+    "17.Area Bounded by x = g(y)": [
+        "Integration",
+        "Area",
+        "Curve",
+        "Definite Integral"
+    ],
+    "17.PlatonicSolids": [
+        "Geometry",
+        "Polyhedron",
+        "Platonic Solids",
+        "Regular Polyhedra"
+    ],
+    "18.Volume by Cross Section S(x)": [
+        "Integration",
+        "Volume",
+        "Cross Section",
+        "Definite Integral"
+    ],
+    "19.Volume of Solid of Revolution about x-axis": [
+        "Integration",
+        "Volume",
+        "Solid of Revolution",
+        "Definite Integral"
+    ],
+    "2.Median": [
+        "Data Analysis",
+        "Median",
+        "Representative Value",
+        "Statistics"
+    ],
+    "20.Volume of Solid of Revolution about y-axis": [
+        "Integration",
+        "Volume",
+        "Solid of Revolution",
+        "Definite Integral"
+    ],
+    "21.Distance Traveled on a Number Line": [
+        "Integration",
+        "Distance",
+        "Absolute Value",
+        "Definite Integral",
+        "Velocity"
+    ],
+    "22.Distance Traveled on the Coordinate Plane": [
+        "Integration",
+        "Distance",
+        "Definite Integral",
+        "Velocity",
+        "Parametric Curve"
+    ],
+    "23.Length of a Parametric Curve": [
+        "Integration",
+        "Curve Length",
+        "Definite Integral",
+        "Parametric Curve"
+    ],
+    "24.Length of the Curve y = f(x)": [
+        "Integration",
+        "Curve Length",
+        "Definite Integral",
+        "Function Graph"
+    ],
+    "3.Quartiles": [
+        "Data Analysis",
+        "Quartiles",
+        "Representative Value",
+        "Statistics"
+    ],
+    "4.Incenter & Angle Bisectors": [
+        "Geometry",
+        "Triangle",
+        "Incenter",
+        "Incircle",
+        "Angle Bisector"
+    ],
+    "4.Mode": [
+        "Data Analysis",
+        "Mode",
+        "Representative Value",
+        "Statistics"
+    ],
+    "5.Centroid & Medians": [
+        "Geometry",
+        "Triangle",
+        "Centroid",
+        "Median"
+    ],
+    "5.Quartile Range & Deviation": [
+        "Data Analysis",
+        "Quartile Range",
+        "Quartile Deviation",
+        "Statistics"
+    ],
+    "6.Box Plot": [
+        "Data Analysis",
+        "Box Plot",
+        "Statistics",
+        "Visualization"
+    ],
+    "6.Ceva's Theorem": [
+        "Geometry",
+        "Triangle",
+        "Ceva's Theorem",
+        "Ratio"
+    ],
+    "7.Menelaus' Theorem": [
+        "Geometry",
+        "Triangle",
+        "Menelaus' Theorem",
+        "Ratio"
+    ],
+    "7.Variance & Standard Deviation": [
+        "Data Analysis",
+        "Variance",
+        "Standard Deviation",
+        "Statistics"
+    ],
+    "8.Positive & Negative Correlation": [
+        "Data Analysis",
+        "Correlation",
+        "Positive Correlation",
+        "Negative Correlation",
+        "Statistics"
+    ],
+    "8.Triangle Side Length Inequality": [
+        "Geometry",
+        "Triangle",
+        "Side Inequality",
+        "Existence Condition"
+    ],
+    "9.Correlation Coefficient": [
+        "Data Analysis",
+        "Correlation Coefficient",
+        "Statistics"
+    ],
+    "9.Triangle Angle-Side Relationship": [
+        "Geometry",
+        "Triangle",
+        "Angle-Side Relationship"
+    ]
+}
