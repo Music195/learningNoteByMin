@@ -3,12 +3,14 @@
 </div>
 <div class="math-foundation">
     <h3>Mathematical Foundation</h3>
-    <p>Correlation describes how two variables move in relation to each other. It tells us whether they tend to increase
+    <p>
+        Correlation describes how two variables move in relation to each other. It tells us whether they tend to increase
         together, move in opposite directions, or show no clear pattern. When both variables increase or decrease
         together, the correlation is positive. When one variable increases while the other decreases, the correlation is
         negative. The correlation coefficient expresses how strong this relationship is, using values from −1 to +1:
         values close to ±1 indicate a strong linear relationship, while values near 0 indicate little or no linear
-        connection.</p>
+        connection.
+    </p>
 
 
     <div class="formula-block">
@@ -50,37 +52,6 @@
     </div>
 </div>
 
-<!-- <div class="correlation-row">
-    <div class="correlation-diagram">
-        <div class="correlation-title">
-            Positive Correlation
-        </div>
-        <svg height="120" width="160">
-            <rect fill="#fff" height="120" width="160" x="0" y="0"></rect>
-            <line stroke="#1976d2" stroke-width="2" x1="20" x2="140" y1="100" y2="20"></line>
-            <circle cx="30" cy="90" fill="#ff7043" r="5"></circle>
-            <circle cx="50" cy="75" fill="#ff7043" r="5"></circle>
-            <circle cx="70" cy="60" fill="#ff7043" r="5"></circle>
-            <circle cx="90" cy="45" fill="#ff7043" r="5"></circle>
-            <circle cx="120" cy="30" fill="#ff7043" r="5"></circle>
-        </svg>
-    </div>
-    <div class="correlation-diagram">
-        <div class="correlation-title">
-            Negative Correlation
-        </div>
-        <svg height="120" width="160">
-            <rect fill="#fff" height="120" width="160" x="0" y="0"></rect>
-            <line stroke="#1976d2" stroke-width="2" x1="20" x2="140" y1="20" y2="100"></line>
-            <circle cx="30" cy="30" fill="#ff7043" r="5"></circle>
-            <circle cx="50" cy="45" fill="#ff7043" r="5"></circle>
-            <circle cx="70" cy="60" fill="#ff7043" r="5"></circle>
-            <circle cx="90" cy="75" fill="#ff7043" r="5"></circle>
-            <circle cx="120" cy="90" fill="#ff7043" r="5"></circle>
-        </svg>
-    </div>
-</div> -->
-
 <div class="interactive-demo">
     <h3>Interactive Scatter Plot & Correlation Calculator</h3>
     <div class="demo-controls">
@@ -94,20 +65,13 @@
         </div>
         
         <div class="control-btn">
-            <button id="btn-corcoe-plot" class="btn-style">Generate Plot</button>
-            <button id="btn-corcoe-toggle-trend" class="btn-style">Toggle Trend</button>
-            <button id="btn-corcoe-data" class="btn-style">Random Data</button>
-            <button id="btn-corcoe-reset" class="btn-style">Reset</button>
+            <button id="btn-corcoe-plot" class="btn-style" onclick="plotGenerate()">Generate Plot</button>
+            <button id="btn-corcoe-toggle-trend" class="btn-style" onclick="toggleTrend()">Toggle Trend</button>
+            <button id="btn-corcoe-data" class="btn-style" onclick="randomData()">Random Data</button>
+            <button id="btn-corcoe-reset" class="btn-style" onclick="resetPlot()">Reset</button>
         </div>
         <div class="plot-wrap">
-            <!-- <div id="scatter-plot-container" class="plot">
-                <div class="grid"></div>
-                <div class="axis axis-x"></div>
-                <div class="axis axis-y"></div>
-                <div id="x-ticks" class="ticks x"></div>
-                <div id="y-ticks" class="ticks y"></div>
-            </div> -->
-            <canvas id="plot" width = "420" style="border: 1px solid black"></canvas>
+            <canvas id="plot" width = "420"  style="border: 1px solid black"></canvas>
             <div id="tooltip" class="tooltip"></div>
             <div id="output" class="output"></div>
         </div>
@@ -118,15 +82,15 @@
     <div class="demo-output" id="demo-output">
         <div class="summary">
             <div class="item">
-                <div class="value">1.00</div>
+                <div id="rValue" class="value">1.00</div>
                 <div class="label">Correlation (r)</div>
             </div>
             <div class="item">
-                <div class="value">Positive</div>
+                <div id="rDirection" class="value">Positive</div>
                 <div class="label">Direction</div>
             </div>
             <div class="item">
-                <div class="value">Perfect</div>
+                <div id="rStrength" class="value">Perfect</div>
                 <div class="label">Strength</div>
             </div>
         </div>
@@ -273,126 +237,191 @@
 </div>
 
 <script>
-    // function generateScatterPlot() {
-    //     const xInput = document.getElementById('x-data').value;
-    //     const yInput = document.getElementById('y-data').value;
+    const canvas = document.getElementById("plot");
+    const ctx = canvas.getContext("2d");
+    const tooltip = document.getElementById("tooltip");
 
-    //     const xValues = xInput.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
-    //     const yValues = yInput.split(',').map(y => parseFloat(y.trim())).filter(y => !isNaN(y));
+    const W = canvas.width;
+    const H = canvas.height; // Adjusted height for better visibility
+    const PAD = 40;
 
-    //     if (xValues.length !== yValues.length || xValues.length < 2) {
-    //         alert('Please enter equal number of X and Y values (at least 2 pairs).');
-    //         return;
-    //     }
+    let dataX = [], dataY = [];
+    let showTrend = true;
+    let rValue = 0;
 
-    //     // Calculate correlation coefficient
-    //     const correlation = calculateCorrelation(xValues, yValues);
-    //     const direction = correlation > 0 ? 'Positive' : correlation < 0 ? 'Negative' : 'None';
-    //     const strength = Math.abs(correlation) >= 0.8 ? 'Strong' :
-    //         Math.abs(correlation) >= 0.6 ? 'Moderate' :
-    //             Math.abs(correlation) >= 0.3 ? 'Weak' : 'Very Weak';
+    /* ---------- helpers ---------- */
+    const mean = a => a.reduce((s,v)=>s+v,0)/a.length;
 
-    //     // Update scatter plot
-    //     updateScatterPlot(xValues, yValues);
+    function correlation(x, y) {
+        const mx = mean(x), my = mean(y);
+        let num=0, dx=0, dy=0;
+        for (let i=0;i<x.length;i++){
+            num += (x[i]-mx)*(y[i]-my);
+            dx += (x[i]-mx)**2;
+            dy += (y[i]-my)**2;
+        }
+        return num / Math.sqrt(dx*dy);
+    }
 
-    //     // Update output
-    //     const output = document.getElementById('demo-output');
-    //     output.innerHTML = `
-    //   <div class="summary">
-    //    <div class="item">
-    //     <div class="value">${correlation.toFixed(3)}</div>
-    //     <div class="label">Correlation (r)</div>
-    //    </div>
-    //    <div class="item">
-    //     <div class="value">${direction}</div>
-    //     <div class="label">Direction</div>
-    //    </div>
-    //    <div class="item">
-    //     <div class="value">${strength}</div>
-    //     <div class="label">Strength</div>
-    //    </div>
-    //   </div>`;
+    function strength(r){
+        const a = Math.abs(r);
+        if (a>0.8) return "Strong";
+        if (a>0.5) return "Moderate";
+        if (a>0.3) return "Weak";
+        return "Very weak / none";
+    }
 
-    //     // Re-render MathJax
-    //     if (window.MathJax) {
-    //         MathJax.typesetPromise([output]).catch(function (err) {
-    //             console.log('MathJax re-render error:', err);
-    //         });
-    //     }
-    // }
+    const map = (v,min,max,a,b)=> a+(v-min)/(max-min)*(b-a); //min,max = where the value currently lives
+                                                            //a,b = where you want it to live
 
-    // function calculateCorrelation(x, y) {
-    //     const n = x.length;
-    //     const sumX = x.reduce((a, b) => a + b, 0);
-    //     const sumY = y.reduce((a, b) => a + b, 0);
-    //     const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
-    //     const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
-    //     const sumY2 = y.reduce((sum, yi) => sum + yi * yi, 0);
+    /* ---------- drawing ---------- */
+    function clear(){
+        ctx.clearRect(0,0,W,H);
+    }
 
-    //     const numerator = n * sumXY - sumX * sumY;
-    //     const denominator = Math.sqrt((n * sumX2 - sumX * sumX) * (n * sumY2 - sumY * sumY));
+    function grid(){
+        ctx.strokeStyle="rgba(0,0,0,.08)";
+        for(let x=PAD;x<W;x+=40){
+            ctx.beginPath();
+            ctx.moveTo(x,PAD);
+            ctx.lineTo(x,H-PAD);
+            ctx.stroke();
+        }
+        for(let y=PAD;y<H;y+=40){
+            ctx.beginPath();
+            ctx.moveTo(PAD,y);
+            ctx.lineTo(W-PAD,y);
+            ctx.stroke();
+        }
+    }
 
-    //     return denominator === 0 ? 0 : numerator / denominator;
-    // }
+    function axes(){
+        ctx.strokeStyle="#555";
+        ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(PAD,H-PAD);
+        ctx.lineTo(W-PAD,H-PAD);
+        ctx.moveTo(PAD,PAD);
+        ctx.lineTo(PAD,H-PAD);
+        ctx.stroke();
+    }
 
-    // function updateScatterPlot(xValues, yValues) {
-    //     const container = document.getElementById('scatter-plot-container');
+    function ticks(xmin,xmax,ymin,ymax){
+        ctx.fillStyle="#555";
+        ctx.font="11px system-ui";
+        ctx.fillText(xmin, PAD, H-PAD+15);
+        ctx.fillText(xmax, W-PAD-10, H-PAD+15);
+        ctx.fillText(ymax, PAD-25, PAD+5);
+        ctx.fillText(ymin, PAD-25, H-PAD);
+    }
 
-    //     // Clear previous plot
-    //     const existingPoints = container.querySelectorAll('.data-point, .trend-line');
-    //     existingPoints.forEach(point => point.remove());
+    function points(x,y,color){
+        x.forEach((xi,i)=>{ //xi = current x value , i = index
+            const px = map(xi,xmin,xmax,PAD,W-PAD);
+            const py = map(y[i],ymin,ymax,H-PAD,PAD);
+            ctx.beginPath();
+            ctx.fillStyle=color;
+            ctx.arc(px,py,5,0,Math.PI*2);
+            ctx.fill();
+        });
+    }
 
-    //     // Calculate ranges
-    //     const xMin = Math.min(...xValues);
-    //     const xMax = Math.max(...xValues);
-    //     const yMin = Math.min(...yValues);
-    //     const yMax = Math.max(...yValues);
+    function trendLine(x,y,color){
+        if(!showTrend) return;
+        const mx=mean(x), my=mean(y);
+        let num=0, den=0;
+        for(let i=0;i<x.length;i++){
+            num+=(x[i]-mx)*(y[i]-my);
+            den+=(x[i]-mx)**2;
+        }
+        const m=num/den, b=my-m*mx;
 
-    //     const xRange = xMax - xMin || 1;
-    //     const yRange = yMax - yMin || 1;
+        const y1=m*xmin+b;
+        const y2=m*xmax+b;
 
-    //     // Plot points
-    //     xValues.forEach((x, i) => {
-    //         const y = yValues[i];
-    //         const xPos = 50 + ((x - xMin) / xRange) * 300; // 50px margin, 300px plot area
-    //         const yPos = 250 - ((y - yMin) / yRange) * 200; // 250px from top, 200px plot height
+        ctx.strokeStyle=color;
+        ctx.lineWidth=3;
+        ctx.beginPath();
+        ctx.moveTo(map(xmin,xmin,xmax,PAD,W-PAD), map(y1,ymin,ymax,H-PAD,PAD));
+        ctx.lineTo(map(xmax,xmin,xmax,PAD,W-PAD), map(y2,ymin,ymax,H-PAD,PAD));
+        ctx.stroke();
+    }
 
-    //         const point = document.createElement('div');
-    //         point.className = 'data-point';
-    //         point.style.left = xPos + 'px';
-    //         point.style.top = yPos + 'px';
-    //         container.appendChild(point);
-    //     });
+    /* ---------- interaction ---------- */
+    canvas.onmousemove = e=>{
+        const rect=canvas.getBoundingClientRect();
+        const mx=e.clientX-rect.left;
+        const my=e.clientY-rect.top;
 
-    //     // Add trend line if correlation is significant
-    //     const correlation = calculateCorrelation(xValues, yValues);
-    //     if (Math.abs(correlation) > 0.3) {
-    //         const slope = correlation * (yRange / xRange);
-    //         const intercept = (yMax + yMin) / 2 - slope * (xMax + xMin) / 2;
+        for(let i=0;i<dataX.length;i++){
+            const px=map(dataX[i],xmin,xmax,PAD,W-PAD);
+            const py=map(dataY[i],ymin,ymax,H-PAD,PAD);
+            if(Math.hypot(mx-px,my-py)<7){
+                tooltip.textContent=`(${dataX[i]}, ${dataY[i]})`;
+                tooltip.style.left=e.pageX+"px";
+                tooltip.style.top=e.pageY+"px";
+                tooltip.style.opacity=1;
+                return;
+            }
+        }
+        tooltip.style.opacity=0;
+    };
 
-    //         const x1 = xMin;
-    //         const y1 = slope * x1 + intercept;
-    //         const x2 = xMax;
-    //         const y2 = slope * x2 + intercept;
+    /* ---------- main ---------- */
+    let xmin,xmax,ymin,ymax;
 
-    //         const x1Pos = 50 + ((x1 - xMin) / xRange) * 300;
-    //         const y1Pos = 250 - ((y1 - yMin) / yRange) * 200;
-    //         const x2Pos = 50 + ((x2 - xMin) / xRange) * 300;
-    //         const y2Pos = 250 - ((y2 - yMin) / yRange) * 200;
+    function plotGenerate(){
+        dataX=document.getElementById("x-data").value.split(",").map(Number);
+        dataY=document.getElementById("y-data").value.split(",").map(Number);
+        if(dataX.length!==dataY.length) return alert("Length mismatch");
 
-    //         const length = Math.sqrt((x2Pos - x1Pos) ** 2 + (y2Pos - y1Pos) ** 2);
-    //         const angle = Math.atan2(y2Pos - y1Pos, x2Pos - x1Pos) * 180 / Math.PI;
+        xmin=Math.min(...dataX);
+        xmax=Math.max(...dataX);
+        ymin=Math.min(...dataY);
+        ymax=Math.max(...dataY);
 
-    //         const trendLine = document.createElement('div');
-    //         trendLine.className = 'trend-line';
-    //         trendLine.style.width = length + 'px';
-    //         trendLine.style.left = x1Pos + 'px';
-    //         trendLine.style.top = y1Pos + 'px';
-    //         trendLine.style.transform = `rotate(${angle}deg)`;
-    //         container.appendChild(trendLine);
-    //     }
-    // }
+        rValue=correlation(dataX,dataY);
+        redraw();
+    }
 
-    // // Initialize with default data
-    // generateScatterPlot();
+    function redraw(){
+        clear();
+        grid();
+        axes();
+        ticks(xmin,xmax,ymin,ymax);
+
+        const color = rValue>=0 ? "#1f77b4" : "#e74c3c";
+        points(dataX,dataY,color);
+        trendLine(dataX,dataY,color);
+
+        document.getElementById("rValue").textContent = rValue.toFixed(2);
+        document.getElementById("rDirection").textContent = rValue>=0 ? "Positive" : "Negative";
+        document.getElementById("rStrength").textContent = strength(rValue);
+    }
+
+    function toggleTrend(){
+        showTrend=!showTrend;
+        redraw();
+    }
+
+    function randomData(){
+        dataX=[...Array(10)].map((_,i)=>i+1);
+        dataY=dataX.map(()=>Math.round(Math.random()*10));
+        document.getElementById("x-data").value=dataX.join(",");
+        document.getElementById("y-data").value=dataY.join(",");
+        plotGenerate();
+    }
+
+    function resetPlot(){
+        dataX=[1,2,3,4,5]; dataY=[1,2,3,4,5];
+        clear();
+        document.getElementById("x-data").value=dataX.join(",");
+        document.getElementById("y-data").value=dataY.join(",");
+        redraw();
+        document.getElementById("rValue").textContent="1.00";
+        document.getElementById("rDirection").textContent="Positive";
+        document.getElementById("rStrength").textContent="Perfect";
+    }
+
+
 </script>
